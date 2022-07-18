@@ -7,8 +7,9 @@ const {
   deleteRecipe
 } = require('../controllers/recipeController')
 
+const {protect} = require('../middleware/authMiddleware')
 
-router.route('/').get(getRecipes).post(createRecipe)
-router.route('/:id').put(updateRecipe).delete(deleteRecipe)
+router.route('/').get(protect, getRecipes).post(protect, createRecipe)
+router.route('/:id').put(protect, updateRecipe).delete(protect, deleteRecipe)
 
 module.exports = router
